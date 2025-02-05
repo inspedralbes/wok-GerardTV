@@ -17,7 +17,6 @@ public class Utils {
             }
         }
     }
-
     public static int llegirInt(Scanner scanner, String s, int min, int max ) {
         int numero;
         while(true){
