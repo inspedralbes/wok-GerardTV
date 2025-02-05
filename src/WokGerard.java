@@ -17,6 +17,7 @@ public class WokGerard {
         base = escollirBase();
         if (baseMida[base]){
             //TODO: escollir mida
+
         }else{
             System.out.println("Aquesta base només pot anar amb la mida gran del Wok.");
             mida = 2;
