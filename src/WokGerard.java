@@ -13,14 +13,40 @@ public class WokGerard {
     static boolean[] baseMida = {true,true,true,true,true,true,true,false,false};
     public static void main(String[] args) {
         int base,mida,salsa;
-        ArrayList<Integer> ingredients = new ArrayList<>();
+        double preu;
+        ArrayList<Integer> ingredients;
         base = escollirBase();
+        mida = escollirMida(base);
+        ingredients = escollirIngredients();
+        salsa = escollirSalsa();
+        preu = calcularPreu(base,mida,ingredients,salsa);
+        mostrarResumComanda(base,mida,ingredients,salsa,preu);
+    }
+
+    private static void mostrarResumComanda(int base, int mida, ArrayList<Integer> ingredients, int salsa, double preu) {
+    }
+
+    private static double calcularPreu(int base, int mida, ArrayList<Integer> ingredients, int salsa) {
+        //TODO:calcular preu del wok
+        return -1;
+    }
+
+    private static int escollirSalsa() {
+        //TODO: Escollir la salsa
+        return -1;
+    }
+
+    private static ArrayList<Integer> escollirIngredients() {
+        return null;
+    }
+
+    private static int escollirMida(int base) {
         if (baseMida[base]){
             //TODO: escollir mida
-
+            return -1;
         }else{
             System.out.println("Aquesta base només pot anar amb la mida gran del Wok.");
-            mida = 2;
+            return 2;
         }
     }
 
