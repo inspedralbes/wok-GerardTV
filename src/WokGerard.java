@@ -11,12 +11,11 @@ import static src.UtilsWok.*;
 public class WokGerard {
 
     public static void main(String[] args) {
-        int  mida, salsa;
         double preu;
-        ArrayList<Integer> ingredients;
         Base base = escollirBase();
-        ingredients = escollirIngredients();
-        salsa = escollirSalsa();
+        Ingredient[] ingredients = escollirIngredients();
+        Salsa salsa = escollirSalsa();
+        Wok wok = new Wok(base,ingredients,salsa);
         //TODO: Traslladar a dins de Wok preu = calcularPreu(base, mida, ingredients, salsa);
         //TODO: mostrarResumComanda(wok);
     }
@@ -42,16 +41,18 @@ public class WokGerard {
         return preu;
     }
 
-    private static int escollirSalsa() {
+    private static Salsa escollirSalsa() {
         System.out.println("Salses disponibles:");
         for (int i = 0; i < salses.length; i++) {
             System.out.println((i + 1) + " - " + salses[i]);
         }
-        return llegirInt(scan, "Escolleix una salsa:", 1, salses.length) - 1;
+        int salsa = llegirInt(scan, "Escolleix una salsa:", 1, salses.length) - 1;
+
+        return new Salsa(salses[salsa],0 );
     }
 
-    private static ArrayList<Integer> escollirIngredients() {
-        ArrayList<Integer> ingredients = new ArrayList<>();
+    private static Ingredient[] escollirIngredients() {
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
         System.out.println("Ingredients disponibles:");
         for (int i = 0; i < ingredientsDesc.length; i++) {
             System.out.println((i + 1) + " - " + ingredientsDesc[i] + " - " + preusIngredients[i] + "€");
@@ -59,9 +60,9 @@ public class WokGerard {
         int opcio;
         do {
             opcio = llegirInt(scan, "Escolleix un ingredient (0 per acabar):", 0, ingredientsDesc.length);
-            if (opcio > 0) ingredients.add(opcio - 1);
+            if (opcio > 0) ingredients.add(new Ingredient(ingredientsDesc[opcio - 1],preusIngredients[opcio - 1] ));
         } while (opcio != 0);
-        return ingredients;
+        return  ingredients.toArray(new Ingredient[0]);
     }
 
     private static String escollirMida(int base) {
