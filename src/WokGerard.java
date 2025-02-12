@@ -1,30 +1,24 @@
 package src;
 
+import src.wokmodel.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import static src.UtilsGerard.Utils.llegirInt;
+import static src.UtilsWok.*;
 
 public class WokGerard {
-    static Scanner scan = new Scanner(System.in);
-    static String[] basesDesc = {"Fideus Cruixents", "Tallarines d'arròs",
-            "Fideus d'arròs","Fins d'arròs","Arròs Gesami","Arròs Integral","Verdures Variades","Udon","croquetes"};
-    static double[] basePreus = {4.10,4.10,4.10,4.10,4.10,4.10,4.10,5.10,6.5};
-    static boolean[] baseMida = {true,true,true,true,true,true,true,false,false};
-    static String[] salses = {"Soja", "Ostres", "Agredolça", "Teriyaki", "Picant"};
-    static double[] preusIngredients = {1.50, 2.00, 1.80, 2.50, 3.00, 2.20, 1.70, 2.80, 1.60};
-    static String[] ingredientsDesc = {"Pollastre", "Vedella", "Gambes", "Tofu", "Ou", "Xampinyons", "Ceba", "Pebrot", "Pastanaga"};
 
     public static void main(String[] args) {
-        int base, mida, salsa;
+        int  mida, salsa;
         double preu;
         ArrayList<Integer> ingredients;
-        base = escollirBase();
-        mida = escollirMida(base);
+        Base base = escollirBase();
         ingredients = escollirIngredients();
         salsa = escollirSalsa();
-        preu = calcularPreu(base, mida, ingredients, salsa);
-        mostrarResumComanda(base, mida, ingredients, salsa, preu);
+        //TODO: Traslladar a dins de Wok preu = calcularPreu(base, mida, ingredients, salsa);
+        //TODO: mostrarResumComanda(wok);
     }
 
     private static void mostrarResumComanda(int base, int mida, ArrayList<Integer> ingredients, int salsa, double preu) {
@@ -70,24 +64,31 @@ public class WokGerard {
         return ingredients;
     }
 
-    private static int escollirMida(int base) {
+    private static String escollirMida(int base) {
         if (baseMida[base]) {
             System.out.println("Tria la mida del Wok:");
             System.out.println("1 - Petita");
             System.out.println("2 - Gran (+1.50€)");
-            return llegirInt(scan, "Escolleix una mida:", 1, 2);
+            if( llegirInt(scan, "Escolleix una mida:", 1, 2) ==1){
+                return "Petita";
+            }
+            else{
+                return "Gran";
+            }
         } else {
             System.out.println("Aquesta base només pot anar amb la mida gran del Wok.");
-            return 2;
+            return "Gran";
         }
     }
 
-    private static int escollirBase() {
+    private static Base escollirBase() {
         System.out.println("Bases disponibles:");
         for (int i = 0; i < basesDesc.length; i++) {
             System.out.println((i + 1) + " - " + basesDesc[i] + " - " + basePreus[i] + "€");
         }
-        return llegirInt(scan, "Escolleix una base:", 1, basesDesc.length) - 1;
+        int base = llegirInt(scan, "Escolleix una base:", 1, basesDesc.length) - 1;
+        String mida = escollirMida(base);
+        return new Base(basesDesc[base], mida,basePreus[base]);
     }
 }
 
