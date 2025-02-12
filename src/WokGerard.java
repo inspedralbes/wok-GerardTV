@@ -27,17 +27,6 @@ public class WokGerard {
         mostrarResumComanda(base, mida, ingredients, salsa, preu);
     }
 
-    /*private static void mostrarResumComanda(int base, int mida, ArrayList<Integer> ingredients, int salsa, double preu) {
-        System.out.println("\nResum de la comanda:");
-        System.out.println("Base: " + basesDesc[base]);
-        System.out.println("Mida: " + (mida == 1 ? "Petita" : "Gran"));
-        System.out.println("Ingredients: ");
-        for (int ing : ingredients) {
-            System.out.println(" - " + ingredientsDesc[ing]);
-        }
-        System.out.println("Salsa: " + salses[salsa]);
-        System.out.println("Preu total: " + String.format("%.2f", preu) + "€");
-    }*/
     private static void mostrarResumComanda(int base, int mida, ArrayList<Integer> ingredients, int salsa, double preu) {
         System.out.println("\nResum de la comanda:");
         System.out.println("Base: " + basesDesc[base] + " - " + basePreus[base] + "€");
