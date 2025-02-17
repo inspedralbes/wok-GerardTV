@@ -1,26 +1,34 @@
 package src.wokmodel;
 
+import java.util.ArrayList;
+
 public class Wok {
     private Base base;
-    private Ingredient[] ingredeints;
+    private Ingredient[] ingredients;
     private Salsa salsa;
     private double preu;
 
 
     public Wok(Base base,Ingredient[] ingredients, Salsa salsa){
         this.base = base;
-        this.ingredeints = ingredients;
+        this.ingredients = ingredients;
         this.salsa = salsa;
         this.preu = calcularPreu();
     }
 
-    //TODO: geters necessaris
+    public double getPreu(){
+        return this.preu;
+    }
 
     private double calcularPreu(){
-
-        //TODO: calular per preu del wok
-        return -1;
+        double preu = base.getPreu();
+        for (Ingredient ing : this.ingredients) {
+            preu += ing.getPreu();
+        }
+        preu += salsa.getPreu();
+        return preu;
     }
+
 
 
 

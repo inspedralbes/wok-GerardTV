@@ -32,14 +32,6 @@ public class WokGerard {
         System.out.println("Preu total: " + String.format("%.2f", preu) + "€");
     }
 
-    private static double calcularPreu(int base, int mida, ArrayList<Integer> ingredients, int salsa) {
-        double preu = basePreus[base];
-        if (mida == 2) preu += 1.50;
-        for (int ing : ingredients) {
-            preu += preusIngredients[ing];
-        }
-        return preu;
-    }
 
     private static Salsa escollirSalsa() {
         System.out.println("Salses disponibles:");
