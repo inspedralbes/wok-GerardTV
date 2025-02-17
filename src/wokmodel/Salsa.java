@@ -1,19 +1,9 @@
 package src.wokmodel;
 
-public class Salsa {
-    private String descripcio;
-    private double preu;
+public class Salsa extends Producte {
 
     public Salsa(String descripcio,double preu){
-        this.descripcio = descripcio;
-        this.preu = preu;
+        super(descripcio,preu);
     }
 
-    public String getDescripcio(){
-        return descripcio;
-    }
-
-    public double getPreu(){
-        return preu;
-    }
 }

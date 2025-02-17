@@ -1,20 +1,11 @@
 package src.wokmodel;
 
-public class Ingredient {
-    private String descripcio;
-    private double preu;
+public class Ingredient extends Producte {
 
     public Ingredient(String descripcio,double preu){
-        this.descripcio = descripcio;
-        this.preu = preu;
+        super(descripcio,preu);
     }
 
-    public String getDescripcio(){
-        return this.descripcio;
-    }
 
-    public double getPreu(){
-        return this.preu;
-    }
 
 }

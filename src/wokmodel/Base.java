@@ -1,25 +1,15 @@
 package src.wokmodel;
 
-public class Base {
-    private String descripcio;
+public class Base extends Producte{
     private String mida;
-    private double preu;
 
     public Base(String descripcio,String mida,double preu){
-        this.descripcio = descripcio;
+        super(descripcio,preu);
         this.mida = mida;
-        this.preu = preu;
-    }
-
-    public String getDescripcio(){
-        return descripcio;
     }
 
     public String getMida(){
         return mida;
     }
 
-    public double getPreu(){
-        return preu;
-    }
 }
