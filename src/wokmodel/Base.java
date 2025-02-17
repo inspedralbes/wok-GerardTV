@@ -12,4 +12,11 @@ public class Base extends Producte{
         return mida;
     }
 
+
+    @Override
+    public String toString(){
+        return "Base: " + this.getDescripcio() + " - " + String.format("%.2f€",this.getPreu()) +
+                "\nMida: " + this.getMida();
+    }
+
 }

@@ -16,20 +16,20 @@ public class WokGerard {
         Ingredient[] ingredients = escollirIngredients();
         Salsa salsa = escollirSalsa();
         Wok wok = new Wok(base,ingredients,salsa);
-        //TODO: Traslladar a dins de Wok preu = calcularPreu(base, mida, ingredients, salsa);
-        //TODO: mostrarResumComanda(wok);
+        //mostrarResumComanda(wok);
+        System.out.println(wok);
     }
 
-    private static void mostrarResumComanda(int base, int mida, ArrayList<Integer> ingredients, int salsa, double preu) {
+    private static void mostrarResumComanda(Wok wok) {
         System.out.println("\nResum de la comanda:");
-        System.out.println("Base: " + basesDesc[base] + " - " + basePreus[base] + "€");
-        System.out.println("Mida: " + (mida == 1 ? "Petita" : "Gran (+1.50€)"));
+        System.out.println("Base: " + wok.getBase().getDescripcio() + " - " + wok.getBase().getPreu() + "€");
+        System.out.println("Mida: " + wok.getBase().getMida());
         System.out.println("Ingredients: ");
-        for (int ing : ingredients) {
-            System.out.println(" - " + ingredientsDesc[ing] + " - " + preusIngredients[ing] + "€");
+        for (Ingredient ing : wok.getIngredients()) {
+            System.out.println(" - " + ing.getDescripcio() + " - " + ing.getPreu()+ "€");
         }
-        System.out.println("Salsa: " + salses[salsa]);
-        System.out.println("Preu total: " + String.format("%.2f", preu) + "€");
+        System.out.println("Salsa: " + wok.getSalsa().getDescripcio() + " - " + wok.getSalsa().getPreu()+ "€");
+        System.out.println("Preu total: " + String.format("%.2f", wok.getPreu()) + "€");
     }
 
 

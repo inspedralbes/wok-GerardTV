@@ -6,6 +6,9 @@ public class Ingredient extends Producte {
         super(descripcio,preu);
     }
 
-
+    @Override
+    public String toString(){
+        return "Ingredient: " + this.getDescripcio() + " - " + String.format("%.2f€",this.getPreu());
+    }
 
 }
