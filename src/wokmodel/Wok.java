@@ -1,8 +1,10 @@
 package src.wokmodel;
 
-import java.util.ArrayList;
+import java.lang.Math;
 
 public class Wok {
+    private static double preuBasegran = 0.0;
+    public static int contadorWoks;
     private Base base;
     private Ingredient[] ingredients;
     private Salsa salsa;
@@ -14,6 +16,15 @@ public class Wok {
         this.ingredients = ingredients;
         this.salsa = salsa;
         this.preu = calcularPreu();
+        contadorWoks++;
+    }
+
+    public static void setPreuBaseGran(double preu){
+        preuBasegran = preu;
+    }
+
+    public static double getPreuBaseGran() {
+        return preuBasegran;
     }
 
     public double getPreu(){

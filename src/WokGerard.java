@@ -12,6 +12,7 @@ public class WokGerard {
 
     public static void main(String[] args) {
         double preu;
+        Wok.setPreuBaseGran(1.00);
         Base base = escollirBase();
         Ingredient[] ingredients = escollirIngredients();
         Salsa salsa = escollirSalsa();
@@ -61,7 +62,7 @@ public class WokGerard {
         if (baseMida[base]) {
             System.out.println("Tria la mida del Wok:");
             System.out.println("1 - Petita");
-            System.out.println("2 - Gran (+1.50€)");
+            System.out.println("2 - Gran (+"+String.format("%.2f€)",Wok.getPreuBaseGran()));
             if( llegirInt(scan, "Escolleix una mida:", 1, 2) ==1){
                 return MidaBase.PETITA;
             }
@@ -81,7 +82,11 @@ public class WokGerard {
         }
         int base = llegirInt(scan, "Escolleix una base:", 1, basesDesc.length) - 1;
         MidaBase mida = escollirMida(base);
-        return new Base(basesDesc[base], mida,basePreus[base]);
+        if (mida ==  MidaBase.GRAN ) {
+            return new Base(basesDesc[base], mida, basePreus[base] + Wok.getPreuBaseGran());
+        }else{
+            return new Base(basesDesc[base], mida, basePreus[base]);
+        }
     }
 }
 

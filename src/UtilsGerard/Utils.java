@@ -13,7 +13,6 @@ public class Utils {
                 return numero;
             }else{
                 System.out.println("ERROR: Si us plau, introdueixi un número enter vàlid.");
-                scanner.next();
             }
         }
     }
