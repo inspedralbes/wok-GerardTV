@@ -1,5 +1,7 @@
 package src;
 
+import src.dao.WokDAO;
+import src.dao.WokDAOCSV;
 import src.wokmodel.*;
 
 import java.util.ArrayList;
@@ -9,7 +11,7 @@ import static src.UtilsGerard.Utils.llegirInt;
 import static src.UtilsWok.*;
 
 public class WokGerard {
-
+        static WokDAO wokDAO = new WokDAOCSV();
     public static void main(String[] args) {
         double preu;
         Wok.setPreuBaseGran(1.00);
@@ -18,7 +20,8 @@ public class WokGerard {
         Salsa salsa = escollirSalsa();
         Wok wok = new Wok(base,ingredients,salsa);
         //mostrarResumComanda(wok);
-        System.out.println(wok);
+        //System.out.println(wok);
+        wokDAO.guardarWok(wok);
     }
 
     private static void mostrarResumComanda(Wok wok) {
