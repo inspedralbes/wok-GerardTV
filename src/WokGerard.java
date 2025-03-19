@@ -5,6 +5,7 @@ import src.dao.WokDAOCSV;
 import src.wokmodel.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static src.UtilsGerard.Utils.llegirInt;
@@ -22,6 +23,10 @@ public class WokGerard {
         //mostrarResumComanda(wok);
         //System.out.println(wok);
         wokDAO.guardarWok(wok);
+        List<Wok> woks =  wokDAO.llegirWoks();
+        for (Wok w : woks){
+            System.out.println(w);
+        }
     }
 
     private static void mostrarResumComanda(Wok wok) {
