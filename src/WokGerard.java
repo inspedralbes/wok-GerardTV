@@ -2,6 +2,7 @@ package src;
 
 import src.dao.WokDAO;
 import src.dao.WokDAOCSV;
+import src.dao.WokDAOMySQL;
 import src.wokmodel.*;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import static src.UtilsGerard.Utils.llegirInt;
 import static src.UtilsWok.*;
 
 public class WokGerard {
-        static WokDAO wokDAO = new WokDAOCSV();
+        static WokDAO wokDAO = new WokDAOMySQL();
     public static void main(String[] args) {
         double preu;
         Wok.setPreuBaseGran(1.00);
@@ -23,10 +24,10 @@ public class WokGerard {
         //mostrarResumComanda(wok);
         //System.out.println(wok);
         wokDAO.guardarWok(wok);
-        List<Wok> woks =  wokDAO.llegirWoks();
+        /*List<Wok> woks =  wokDAO.llegirWoks();
         for (Wok w : woks){
             System.out.println(w);
-        }
+        }*/
     }
 
     private static void mostrarResumComanda(Wok wok) {

@@ -3,16 +3,18 @@ package src.dao;
 import src.wokmodel.*;
 
 import java.io.*;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class WokDAOCSV implements WokDAO{
-    private static String nomFitxer = "woks.csv";
+    private static Path path = Path.of("files", "woks.csv");
+    File file = new File(path.toString());
     @Override
     public void guardarWok(Wok wok) {
         try {
-            FileWriter myWriter = new FileWriter(nomFitxer,true);
+            FileWriter myWriter = new FileWriter(file,true);
             BufferedWriter bw = new BufferedWriter(myWriter);
             bw.write(wokToCSV(wok));
             bw.newLine();
@@ -43,7 +45,7 @@ public class WokDAOCSV implements WokDAO{
     public List<Wok> llegirWoks() {
         List<Wok> woks = new ArrayList<>();
         try {
-            File myObj = new File(nomFitxer);
+            File myObj = new File(file.toString());
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
