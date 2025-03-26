@@ -1,11 +1,14 @@
 package src.dao;
 
+import src.WokGerard;
 import src.database.ConnexioBD;
 import src.wokmodel.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class WokDAOMySQL implements WokDAO{
@@ -43,8 +46,29 @@ public class WokDAOMySQL implements WokDAO{
 
     @Override
     public List<Wok> llegirWoks() {
-        // TODO Auto-generated method stub
-        return null;
+        List<Wok> woks = new ArrayList<>();
+        try(Connection con = ConnexioBD.getInstance()){
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM Wok");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){
+                Base base = new Base(rs.getString("basedesc"),
+                        MidaBase.valueOf(rs.getString("midabase")),
+                        rs.getDouble("preubase"));
+                List<Ingredient> ingredients = new ArrayList<>();
+                for (String ing: rs.getString("ingredients").split(";")){
+                    if(!ing.isEmpty()){
+                        String[] parts = ing.split(":");
+                        ingredients.add(new Ingredient(parts[0],Double.parseDouble(parts[1])));
+                    }
+                }
+                Salsa salsa = new Salsa(rs.getString("salsadesc"),rs.getDouble("preusalsa"));
+                woks.add(new Wok(base,ingredients.toArray(new Ingredient[0]),salsa));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return woks;
     }
 
 }

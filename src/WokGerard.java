@@ -17,17 +17,17 @@ public class WokGerard {
     public static void main(String[] args) {
         double preu;
         Wok.setPreuBaseGran(1.00);
-        Base base = escollirBase();
+        /*Base base = escollirBase();
         Ingredient[] ingredients = escollirIngredients();
         Salsa salsa = escollirSalsa();
-        Wok wok = new Wok(base,ingredients,salsa);
+        Wok wok = new Wok(base,ingredients,salsa);*/
         //mostrarResumComanda(wok);
         //System.out.println(wok);
-        wokDAO.guardarWok(wok);
-        /*List<Wok> woks =  wokDAO.llegirWoks();
+        //wokDAO.guardarWok(wok);
+        List<Wok> woks =  wokDAO.llegirWoks();
         for (Wok w : woks){
             System.out.println(w);
-        }*/
+        }
     }
 
     private static void mostrarResumComanda(Wok wok) {
