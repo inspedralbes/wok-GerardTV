@@ -59,6 +59,13 @@ public class WokDAOCSV implements WokDAO{
         return woks;
     }
 
+    @Override
+    public Wok servirWok() {
+        System.out.println("TODO: cal implementar aquest mètode");
+        //TODO: Retornar i eliminar el Wok més antic
+        return null;
+    }
+
     private Wok wokFromCSV(String data) {
         String[] camps = data.split(",");
         try {

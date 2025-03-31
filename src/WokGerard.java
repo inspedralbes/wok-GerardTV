@@ -1,5 +1,6 @@
 package src;
 
+import src.UtilsGerard.Utils;
 import src.dao.WokDAO;
 import src.dao.WokDAOCSV;
 import src.dao.WokDAOMySQL;
@@ -17,17 +18,49 @@ public class WokGerard {
     public static void main(String[] args) {
         double preu;
         Wok.setPreuBaseGran(1.00);
-        /*Base base = escollirBase();
-        Ingredient[] ingredients = escollirIngredients();
-        Salsa salsa = escollirSalsa();
-        Wok wok = new Wok(base,ingredients,salsa);*/
-        //mostrarResumComanda(wok);
-        //System.out.println(wok);
-        //wokDAO.guardarWok(wok);
+        int option;
+        do{
+            System.out.println("Menu");
+            System.out.println("1.-Crear un nou Wok");
+            System.out.println("2.-Llistar tots ls Woks");
+            System.out.println("3.-Servir Wok");
+            System.out.println("0.-Sortir");
+            option = llegirInt(scan,"Escull una opció:",0,3);
+            switch (option){
+                case 1: crearWok();break;
+                case 2: llistarWoks();break;
+                case 3: servirWok(); break;
+                case 0:
+                    System.out.println("Adeu!!");
+            }
+        }while(option != 0);
+
+    }
+
+    private static void servirWok() {
+        Wok wok = wokDAO.servirWok();
+        if(wok != null){
+            System.out.println("Aquí te el seu wok:");
+            System.out.println(wok);
+            System.out.println();
+        }
+    }
+
+    private static void llistarWoks() {
         List<Wok> woks =  wokDAO.llegirWoks();
         for (Wok w : woks){
             System.out.println(w);
         }
+        System.out.println();
+    }
+
+    private static void crearWok() {
+        Base base = escollirBase();
+        Ingredient[] ingredients = escollirIngredients();
+        Salsa salsa = escollirSalsa();
+        Wok wok = new Wok(base,ingredients,salsa);
+        wokDAO.guardarWok(wok);
+        mostrarResumComanda(wok);
     }
 
     private static void mostrarResumComanda(Wok wok) {

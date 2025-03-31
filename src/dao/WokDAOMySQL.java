@@ -47,7 +47,8 @@ public class WokDAOMySQL implements WokDAO{
     @Override
     public List<Wok> llegirWoks() {
         List<Wok> woks = new ArrayList<>();
-        try(Connection con = ConnexioBD.getInstance()){
+        try{
+            Connection con = ConnexioBD.getInstance();
             PreparedStatement stmt = con.prepareStatement("SELECT * FROM Wok");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()){
@@ -69,6 +70,38 @@ public class WokDAOMySQL implements WokDAO{
         }
 
         return woks;
+    }
+
+    @Override
+    public Wok servirWok() {
+        Wok wok = null;
+        try{
+            Connection con = ConnexioBD.getInstance();
+            String query = "SELECT * FROM Wok ORDER BY id ASC LIMIT 1";
+            PreparedStatement stmt = con.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()) {
+                Base base = new Base(rs.getString("basedesc"),
+                        MidaBase.valueOf(rs.getString("midabase")),
+                        rs.getDouble("preubase"));
+                List<Ingredient> ingredients = new ArrayList<>();
+                for (String ing : rs.getString("ingredients").split(";")) {
+                    if (!ing.isEmpty()) {
+                        String[] parts = ing.split(":");
+                        ingredients.add(new Ingredient(parts[0], Double.parseDouble(parts[1])));
+                    }
+                }
+                Salsa salsa = new Salsa(rs.getString("salsadesc"), rs.getDouble("preusalsa"));
+                wok = new Wok(base, ingredients.toArray(new Ingredient[0]), salsa);
+                //eliminem el wok
+                PreparedStatement delStmt = con.prepareStatement("DELETE FROM Wok WHERE ID = ?");
+                delStmt.setInt(1,rs.getInt("ID"));
+                delStmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return wok;
     }
 
 }
