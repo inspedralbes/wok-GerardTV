@@ -1,4 +1,4 @@
-package src.database;
+package src.BD_Mysql;
 
 public class DataConnection {
     private static String USR = "gtorrents_wok";

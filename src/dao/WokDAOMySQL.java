@@ -1,7 +1,6 @@
 package src.dao;
 
-import src.WokGerard;
-import src.database.ConnexioBD;
+import src.BD_Mysql.ConnexioBD;
 import src.wokmodel.*;
 
 import java.sql.Connection;
